@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 
@@ -10,9 +10,10 @@ import * as firebase from 'firebase';
 */
 @Injectable()
 export class FirebaseServiceProvider {
-  constructor(public http: HttpClient) {
+  constructor() {
     console.log('Hello FirebaseServiceProvider Provider');
   }
+
   uploadImage(imageURI) {
     return new Promise<any>((resolve, reject) => {
       let storageRef = firebase.storage().ref();
@@ -27,6 +28,7 @@ export class FirebaseServiceProvider {
       })
     })
   }
+
   encodeImageUri(imageUri, callback) {
     var c = document.createElement('canvas');
     var ctx = c.getContext("2d");

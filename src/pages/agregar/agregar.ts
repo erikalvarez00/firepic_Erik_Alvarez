@@ -21,6 +21,7 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 
 //import { storage } from 'firebase';
 import 'whatwg-fetch';
+//import { createWriteStream } from 'fs';
 //import firebase from 'firebase';
 
 
@@ -34,8 +35,8 @@ export class AgregarPage {
 
   platillos: Observable<Platillo[]>;
 
-  nombre: any;
-  tipo: any;
+  nombre: string = "";
+  tipo: string = "";
   img: any;
   assetCollection;
 
@@ -120,7 +121,7 @@ agregarPlatillo2() {
   if (this.nombre != null && this.tipo != null && this.img != null) {
     //Cargando la imagen en el servidor
     const file = this.imagePreview;
-    const filePath = '/platillos/' + this.nombre;
+    const filePath = '/platillos/' + this.nombre + ".jpg";
     const fileRef = this.fireStorage.ref(filePath);
     //Carga de imagen por funcion "upload"
     const task = this.fireStorage.upload(filePath, file);
@@ -133,7 +134,6 @@ agregarPlatillo2() {
       finalize(() => {
         this.downloadURL = fileRef.getDownloadURL();
         this.downloadURL.subscribe(imgURL => {
-          //console.log("imgURL: " + imgURL);
           this.img = imgURL;
 
           //La imagen ya se encuentra disponible (deberia)
@@ -151,12 +151,9 @@ agregarPlatillo2() {
           console.log("Error al cargar", err);
           this.presentToast("¡La imagen no pudo subirse!");
         });
-
       }
       )
-    )
-      .subscribe()
-
+    ).subscribe()
   } else {
     //El registro no es completo
     this.presentToast("¡Platillo Incompleto!");
