@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { Camera } from '@ionic-native/camera';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { LoginUserProvider } from '../providers/login-user/login-user';
+import { FirebaseServiceProvider } from '../providers/firebase-service/firebase-service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { LoginUserProvider } from '../providers/login-user/login-user';
     Camera,
     ImagePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoginUserProvider
+    LoginUserProvider,
+    FirebaseServiceProvider
   ]
 })
 export class AppModule {}
