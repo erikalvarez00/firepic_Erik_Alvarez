@@ -9,6 +9,9 @@ import { BebidasPage } from '../bebidas/bebidas';
 import { ModalController } from 'ionic-angular';
 import { AgregarPage } from '../agregar/agregar';
 
+import { LoginUserProvider } from '../../providers/login-user/login-user';
+import { VerDetallesPage } from '../ver-detalles/ver-detalles';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -20,7 +23,8 @@ export class HomePage {
 
   platillos: Observable<Platillo[]>;
 
-  constructor(private readonly afs: AngularFirestore,
+  constructor(private luProvider: LoginUserProvider,
+    private readonly afs: AngularFirestore,
     public navCtrl: NavController,
     public modalCtrl: ModalController) {
 
@@ -34,16 +38,18 @@ export class HomePage {
     );
   }
 
+  verDetalles(platillo: Platillo){
+    const modal = this.modalCtrl.create(VerDetallesPage, { platillo:platillo });
+    modal.present();
+  }
+
   iraBebidas() {
     this.navCtrl.push(BebidasPage);
-
   }
 
   irAgregar() {
-
     const modal = this.modalCtrl.create(AgregarPage);
     modal.present();
-
   }
 
 }

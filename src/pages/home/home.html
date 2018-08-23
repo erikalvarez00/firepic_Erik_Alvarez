@@ -15,10 +15,10 @@
       </ion-thumbnail>
       <h2>{{platillo.nombre}}</h2>
       <p>{{platillo.tipo}}</p>
-      <button ion-button clear item-end>View</button>
+      <button ion-button clear item-end (tap)="verDetalles(platillo)">View</button>
     </ion-item>
   </ion-list>
 
   <button ion-button block (tap)="iraBebidas()">Ir a bebidas</button>
-  <button ion-button block (tap)="irAgregar()">Agregar platillo</button>
+  <button *ngIf="luProvider.esAdmin" ion-button block (tap)="irAgregar()">Agregar platillo</button>
 </ion-content>

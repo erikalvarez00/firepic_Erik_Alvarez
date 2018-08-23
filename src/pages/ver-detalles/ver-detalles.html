@@ -1,0 +1,29 @@
+<!--
+  Generated template for the VerDetallesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Detalles</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="platillo">
+    <h1>{{platillo.nombre}}</h1>
+    <img [src]="platillo.img">
+    <h5>{{platillo.tipo}}</h5>
+  </div>
+  <div *ngIf="bebida">
+      <h1>{{bebida.nombre}}</h1>
+      <img [src]="bebida.img">
+      <h5>{{bebida.sabor}}</h5>
+      <h5>{{bebida.precio}}</h5>
+  </div>
+  
+  <button ion-button block (tap)="close()">Cerrar</button>
+</ion-content>

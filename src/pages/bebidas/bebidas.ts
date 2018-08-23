@@ -3,6 +3,8 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs';  
 import { map } from 'rxjs/operators';
 import { Bebida } from '../../commons/bebida';
+import { ModalController } from 'ionic-angular';
+import { VerDetallesPage } from '../ver-detalles/ver-detalles';
 
 @Component({
   selector: 'page-bebidas',
@@ -14,7 +16,8 @@ export class BebidasPage {
 
   bebidas: Observable<Bebida[]>;
 
-  constructor(private readonly afs: AngularFirestore) {
+  constructor(private readonly afs: AngularFirestore,
+              private modalCtrl:ModalController) {
     this.itemsCollection = afs.collection<Bebida>('bebidas');
     this.bebidas = this.itemsCollection.snapshotChanges().pipe(
                   map(actions => actions.map(a => {
@@ -23,5 +26,10 @@ export class BebidasPage {
                     return { id, ...data };
                   }))
                 );   
+  }
+
+  verDetalles(bebida: Bebida){
+    const modal = this.modalCtrl.create(VerDetallesPage, { bebida:bebida });
+    modal.present();
   }
 }

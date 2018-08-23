@@ -17,7 +17,7 @@
           </ion-thumbnail>
           <h2>{{bebida.nombre}}</h2>
           <p>{{bebida.sabor}}, Precio:{{bebida.precio}} </p> 
-          <button ion-button clear item-end>View</button>
+          <button ion-button clear item-end (tap)="verDetalles(bebida)">View</button>
         </ion-item>
       </ion-list>
     
