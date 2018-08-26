@@ -118,7 +118,7 @@ agregarPlatillo2() {
 
   const id = this.afs.createId(); //Crea un ID automáticamente
   //El registro debe ser completo
-  if (this.nombre != null && this.tipo != null && this.img != null) {
+  if (this.nombre != null && this.tipo != null && this.imagePreview != null) {
     //Cargando la imagen en el servidor
     const file = this.imagePreview;
     const filePath = '/platillos/' + this.nombre + ".jpg";
@@ -180,7 +180,7 @@ selectImageCamera(src:number) {
     this.imagePreview = 'data:image/jpeg;base64,' + imageData;
     this.imagen64 = imageData;
     
-    this.uploadFile(imageData);
+    //this.uploadFile(imageData);
   }, (err) => {
     console.log("Error en cámara", JSON.stringify(err));
     this.presentToast("¡No se pudo tomar la foto!");
@@ -216,6 +216,10 @@ selectImageGallery() {
   
 //Carga Asicnrona de imagenes (funciona junto a un <input type ="file">)
 uploadFile(event) {
+  this.imagePreview = event.target.files[0];
+  this.imagen64 = event.target.files[0];
+
+  /*
   const file = event.target.files[0];
   const filePath = '/platillos/' + this.nombre;
   const fileRef = this.fireStorage.ref(filePath);
@@ -237,6 +241,7 @@ uploadFile(event) {
     )
   )
     .subscribe()
+    */
 }
 
 
